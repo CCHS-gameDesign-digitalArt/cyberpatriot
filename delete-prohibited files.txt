@@ -1,0 +1,34 @@
+    echo "$LogTime uss: [$UserName]# Deleting media files..." >> output.log
+
+    # Media files
+    echo "###MEDIA FILES###" >> pFiles.log
+    find / \( -name "*.mov" -o -name "*.mp4" -o -name "*.mp3" -o -name "*.wav" \) -type f >> pFiles.log
+
+    # Pictures
+    echo "###PICTURES###" >> pFiles.log
+    find / \( -name "*.jpg" -o -name "*.jpeg" \) -type f >> pFiles.log
+
+    # Other Files
+    echo "###OTHER###" >> pFiles.log
+    find / \( -name "*.tar.gz" -o -name "*.php" -o -name "*backdoor*.*" -o -name "*backdoor*.php" \) -type f >> pFiles.log
+
+    # Items without groups
+    echo "###FILES WITHOUT GROUPS###" >> pFiles.log
+    find / -nogroup >> pFiles.log
+
+    # Games
+    echo "###GAMES###" >> pFiles.log
+    dpkg -l | grep -i game >> pFiles.log
+
+    # Deletes audio files
+    find / -name "*.mp3" -type f -delete
+
+    # Deletes Video files
+    find / \( -name "*.mov" -o -name "*.mp4" \) -type f -delete
+
+    # Deletes pictures
+    find / \( -name "*.jpg" -o -name "*.jpeg" \) -type f -delete
+
+    echo "$LogTime uss: [$UserName]# Media files deleted." >> output.log
+    cat pFiles.log
+    pause

@@ -1,0 +1,13 @@
+    echo "$LogTime uss: [$UserName]# Checking for firewall..." >> output.log
+        if ! dpkg -l | grep -q ufw; then
+            apt-get update
+            apt-get install ufw -y
+            echo "$LogTime uss: [$UserName]# UFW installed." >> output.log
+        fi
+
+        echo "$LogTime uss: [$UserName]# Enabling firewall..." >> output.log
+        ufw enable >>output.log
+        ufw status >> output.log
+        sleep 1
+        echo "$LogTime uss: [$UserName]# Firewall has been turned on and configured." >> output.log
+        ufw status
